@@ -16,6 +16,11 @@ class EmployerRepository
         return $employer;
     }
 
+    public function findAll(): array
+    {
+        return Employer::find()->all();
+    }
+
     public function add(Employer $employer): void
     {
         if (!$employer->getIsNewRecord()) {

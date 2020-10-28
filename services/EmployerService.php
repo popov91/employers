@@ -14,6 +14,11 @@ class EmployerService
         $this->employerRepository = $employerRepository;
     }
 
+    public function findAll(): array
+    {
+        return $this->employerRepository->findAll();
+    }
+
     public function create(string $name, string $surname, string $patronymic, int $gender, int $salary): void
     {
         $employer = Employer::create($name, $surname, $patronymic, $gender, $salary);

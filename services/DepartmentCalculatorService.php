@@ -7,22 +7,20 @@ use app\repositories\DepartmentRepository;
 
 class DepartmentCalculatorService
 {
-    private $department;
     private $departmentRepository;
 
-    public function __construct(Department $department, DepartmentRepository $departmentRepository)
+    public function __construct(DepartmentRepository $departmentRepository)
     {
-        $this->department = $department;
         $this->departmentRepository = $departmentRepository;
     }
 
-    public function getEmployersCount(): ?int
+    public function getEmployersCount(string $id): ?int
     {
-        return $this->departmentRepository->countEmployersById($this->department->id);
+        return $this->departmentRepository->countEmployersById($id);
     }
 
-    public function getMaxEmployersSalary(): ?int
+    public function getMaxEmployersSalary($id): ?int
     {
-        return $this->departmentRepository->getMaxSalaryById($this->department->id);
+        return $this->departmentRepository->getMaxSalaryById($id);
     }
 }

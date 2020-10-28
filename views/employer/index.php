@@ -1,9 +1,34 @@
 <?php
 /* @var $this yii\web\View */
 ?>
-<h1>employer/index</h1>
+<h1>Сотрудники</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+<div class="row">
+    <a style="padding-left: 15px">Добавить нового сотрудника</a><br>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Пол</th>
+            <th>З/п</th>
+            <th>Отделы</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($employers as $employer): ?>
+            <tr>
+                <td><?= $employer->name ?></td>
+                <td><?= $employer->surname ?></td>
+                <td><?= $employer->patronymic ?></td>
+                <td><?= $employer->getGenderVariants()[$employer->gender] ?></td>
+                <td><?= $employer->salary ?></td>
+                <td><?= $employer->findAllDepartments($employer) ?></td>
+                <td><a>Изменить </a><a>Удалить</a></td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+</div>

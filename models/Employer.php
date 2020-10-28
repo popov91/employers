@@ -41,7 +41,18 @@ class Employer extends ActiveRecord
         $this->salary = $salary;
     }
 
-    public static function getGenderVariants(): array
+    public function findAllDepartments()
+    {
+        $result = [];
+
+        foreach ($this->departments as $department) {
+            $result[] = $department->name;
+        }
+
+        return implode(',<br>', $result);
+    }
+
+    public function getGenderVariants(): array
     {
         return [
             static::GENDER_MALE   => 'Мужчина',
@@ -104,4 +115,6 @@ class Employer extends ActiveRecord
     {
         return $this->hasMany(Department::className(), ['id' => 'department_id'])->viaTable('employers_lnk_departments', ['employer_id' => 'id']);
     }
+
+
 }

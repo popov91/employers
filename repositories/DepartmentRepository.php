@@ -9,7 +9,6 @@ use yii\db\Exception;
 
 class DepartmentRepository
 {
-
     private $connection;
 
     public function __construct()
@@ -24,6 +23,11 @@ class DepartmentRepository
         }
 
         return $department;
+    }
+
+    public function findAll(): array
+    {
+        return Department::find()->all();
     }
 
     public function add(Department $department): void
@@ -55,10 +59,13 @@ class DepartmentRepository
 
     public function countEmployersById(string $id): ?int
     {
-        $sql = "SELECT COUNT(*) FROM employers_lnk_departments WHERE department_id = $id";
+        $sql = "SELECT COUNT(*) FROM employers_lnk_departments WHERE department_id = :id";
 
         try {
-            $employers = $this->connection->createCommand($sql)->queryScalar();
+            $employers = $this->connection
+                ->createCommand($sql)
+                ->bindValue(':id', $id)
+                ->queryScalar();
         } catch (Exception $e) {
             throw new \RuntimeException('Ошибка при выполнении запроса.');
         }
@@ -70,9 +77,12 @@ class DepartmentRepository
     {
         $sql = "SELECT MAX(salary) FROM employers
                 WHERE employers.id IN (SELECT employer_id 
-                FROM employers_lnk_departments WHERE department_id = $id)";
+                FROM employers_lnk_departments WHERE department_id = :id)";
         try {
-            $salary = $this->connection->createCommand($sql)->queryScalar();
+            $salary = $this->connection
+                ->createCommand($sql)
+                ->bindValue(':id', $id)
+                ->queryScalar();
         } catch (Exception $e) {
             throw new \RuntimeException('Ошибка при выполнении запроса.');
         }

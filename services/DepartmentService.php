@@ -14,6 +14,11 @@ class DepartmentService
         $this->departmentRepository = $departmentRepository;
     }
 
+    public function findAll(): array
+    {
+        return $this->departmentRepository->findAll();
+    }
+
     public function create(string $name): void
     {
         $department = Department::create($name);
