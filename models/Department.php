@@ -13,6 +13,19 @@ use yii\db\ActiveRecord;
  */
 class Department extends ActiveRecord
 {
+    public static function create(string $name): self
+    {
+        $department = new self;
+        $department->name = $name;
+
+        return $department;
+    }
+
+    public function edit(string $name)
+    {
+        $this->name = $name;
+    }
+
     /**
      * {@inheritdoc}
      */

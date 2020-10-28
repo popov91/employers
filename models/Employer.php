@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -17,6 +18,37 @@ use yii\db\ActiveRecord;
  */
 class Employer extends ActiveRecord
 {
+    const GENDER_MALE   = 0;
+    const GENDER_FEMALE = 1;
+
+    public static function create($name, $surname, $patronymic, $gender, $salary): self
+    {
+        $employer = new self;
+        $employer->name = $name;
+        $employer->surname = $surname;
+        $employer->patronymic = $patronymic;
+        $employer->gender = $gender;
+        $employer->salary = $salary;
+
+        return $employer;
+    }
+
+    public function edit($name, $surname, $patronymic, $salary)
+    {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->patronymic = $patronymic;
+        $this->salary = $salary;
+    }
+
+    public static function getGenderVariants(): array
+    {
+        return [
+            static::GENDER_MALE   => 'Мужчина',
+            static::GENDER_FEMALE => 'Женщина',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +66,7 @@ class Employer extends ActiveRecord
             [['name', 'surname', 'patronymic', 'gender', 'salary'], 'required'],
             [['gender', 'salary'], 'integer'],
             [['name', 'surname', 'patronymic'], 'string', 'max' => 30],
+            ['gender', 'in', 'range' => array_keys($this->getGenderVariants())],
         ];
     }
 
