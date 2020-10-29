@@ -7,6 +7,8 @@ use app\models\EmployersLnkDepartments;
 
 $this->title = 'My Yii Application';
 ?>
+<h1>Сетка сотрудников/отделов</h1>
+
 <div class="site-index">
     <div class="row">
         <table class="table table-bordered">

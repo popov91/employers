@@ -14,7 +14,7 @@ class m201027_192951_create_departments_table extends Migration
     public function safeUp()
     {
         $this->createTable( self::TABLE_NAME, [
-            'id' => $this->primaryKey()->notNull(),
+            'id' => $this->primaryKey(),
             'name' => $this->string(30)->notNull(),
         ]);
 

@@ -2,12 +2,12 @@
 /* @var $this yii\web\View */
 
 use app\helpers\EmployerHelper;
-
 ?>
+
 <h1>Сотрудники</h1>
 
 <div class="row">
-    <a style="padding-left: 15px">Добавить нового сотрудника</a><br>
+    <a style="padding-left: 15px" href="create">Добавить нового сотрудника</a><br>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -29,7 +29,9 @@ use app\helpers\EmployerHelper;
                 <td><?= EmployerHelper::getGenderName($employer->gender) ?></td>
                 <td><?= $employer->salary ?></td>
                 <td><?= $employer->findAllDepartments($employer) ?></td>
-                <td><a>Изменить </a><a>Удалить</a></td>
+                <td><a href="update?id=<?= $employer->id ?>">Изменить </a>
+                    <a href="delete?id=<?= $employer->id ?>">Удалить</a>
+                </td>
             </tr>
         <?php endforeach ?>
         </tbody>

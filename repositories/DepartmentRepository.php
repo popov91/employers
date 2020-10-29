@@ -6,7 +6,6 @@ use app\models\Department;
 use app\repositories\exceptions\NotFoundException;
 use Yii;
 use yii\db\Exception;
-use yii\web\NotFoundHttpException;
 
 class DepartmentRepository
 {
@@ -17,7 +16,7 @@ class DepartmentRepository
         $this->connection = Yii::$app->getDb();
     }
 
-    public function find(string $id): Department
+    public function find(string $id)
     {
         if (!$department = Department::findOne($id)) {
             throw new NotFoundException('Запись не найдена.');
@@ -26,12 +25,12 @@ class DepartmentRepository
         return $department;
     }
 
-    public function findAll(): array
+    public function findAll()
     {
         return Department::find()->all();
     }
 
-    public function add(Department $department): void
+    public function add(Department $department)
     {
         if (!$department->getIsNewRecord()) {
             throw new \RuntimeException('Запись уже существует.');
@@ -41,7 +40,7 @@ class DepartmentRepository
         }
     }
 
-    public function save(Department $department): void
+    public function save(Department $department)
     {
         if ($department->getIsNewRecord()) {
             throw new \RuntimeException('Невозможно сохранить новую запись.');

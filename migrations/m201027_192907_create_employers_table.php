@@ -14,11 +14,11 @@ class m201027_192907_create_employers_table extends Migration
     public function safeUp()
     {
         $this->createTable(self::TABLE_NAME, [
-            'id' => $this->primaryKey()->notNull(),
+            'id' => $this->primaryKey(),
             'name' => $this->string(30)->notNull(),
             'surname' => $this->string(30)->notNull(),
-            'patronymic' => $this->string(30)->notNull(),
-            'gender' => $this->smallInteger(2)->notNull(),
+            'patronymic' => $this->string(30),
+            'gender' => $this->smallInteger(2),
             'salary' => $this->integer()->notNull(),
         ]);
 

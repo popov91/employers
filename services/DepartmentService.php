@@ -14,7 +14,7 @@ class DepartmentService
         $this->departmentRepository = $departmentRepository;
     }
 
-    public function findAll(): array
+    public function findAll()
     {
         return $this->departmentRepository->findAll();
     }
@@ -42,6 +42,7 @@ class DepartmentService
             return false;
         }
         $this->departmentRepository->delete($department);
+
         return true;
     }
 }

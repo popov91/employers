@@ -17,6 +17,9 @@ class EmployerHelper
 
     public static function getGenderName($gender): string
     {
+        if (is_null($gender)) {
+            return '';
+        }
         return ArrayHelper::getValue(self::getGenderList(), $gender);
     }
 

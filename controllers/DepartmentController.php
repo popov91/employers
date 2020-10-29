@@ -8,10 +8,10 @@ use app\models\forms\DepartmentForm;
 use app\services\DepartmentCalculatorService;
 use app\services\DepartmentService;
 use Yii;
-use yii\helpers\VarDumper;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class DepartmentController extends \yii\web\Controller
+class DepartmentController extends Controller
 {
     private $departmentService;
     private $departmentCalculatorService;

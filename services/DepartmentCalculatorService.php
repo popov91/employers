@@ -2,7 +2,6 @@
 
 namespace app\services;
 
-use app\models\Department;
 use app\repositories\DepartmentRepository;
 
 class DepartmentCalculatorService

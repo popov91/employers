@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use app\helpers\EmployerHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -33,10 +33,11 @@ class Employer extends ActiveRecord
         return $employer;
     }
 
-    public function edit($name, $surname, $patronymic, $salary)
+    public function edit($name, $surname, $patronymic, $gender, $salary)
     {
         $this->name = $name;
         $this->surname = $surname;
+        $this->gender = $gender;
         $this->patronymic = $patronymic;
         $this->salary = $salary;
     }
@@ -66,10 +67,10 @@ class Employer extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'surname', 'patronymic', 'gender', 'salary'], 'required'],
+            [['name', 'surname','salary'], 'required'],
             [['gender', 'salary'], 'integer'],
             [['name', 'surname', 'patronymic'], 'string', 'max' => 30],
-            ['gender', 'in', 'range' => array_keys($this->getGenderVariants())],
+            ['gender', 'in', 'range' => array_keys(EmployerHelper::getGenderList())],
         ];
     }
 
