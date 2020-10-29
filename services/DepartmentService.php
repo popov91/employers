@@ -19,22 +19,29 @@ class DepartmentService
         return $this->departmentRepository->findAll();
     }
 
-    public function create(string $name): void
+    public function create(string $name)
     {
         $department = Department::create($name);
         $this->departmentRepository->add($department);
+
+        return $department;
     }
 
-    public function edit(string $id, string $name): void
+    public function edit(string $id, string $name)
     {
         $department = $this->departmentRepository->find($id);
         $department->edit($name);
         $this->departmentRepository->save($department);
     }
 
-    public function delete(string $id): void
+    public function delete(string $id)
     {
         $department = $this->departmentRepository->find($id);
+        $relations = $this->departmentRepository->checkRelations($id);
+        if (count($relations) > 0) {
+            return false;
+        }
         $this->departmentRepository->delete($department);
+        return true;
     }
 }

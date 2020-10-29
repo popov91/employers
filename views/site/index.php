@@ -2,6 +2,9 @@
 
 /* @var $this yii\web\View */
 
+use app\helpers\EmployerHelper;
+use app\models\EmployersLnkDepartments;
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
@@ -10,30 +13,20 @@ $this->title = 'My Yii Application';
             <thead>
             <tr>
                 <th></th>
-                <th>Отдел закупок</th>
-                <th>Отдел продаж</th>
-                <th>PR-отдел</th>
+                <?php foreach ($departments as $department):?>
+                <th><?= $department->name ?></th>
+                <?php endforeach ?>
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($employers as $employer): ?>
             <tr>
-                <td>Иван Йода</td>
-                <td></td>
-                <td>✓</td>
-                <td>✓</td>
+                <td><?= EmployerHelper::getFullName($employer) ?></td>
+                <?php foreach ($departments as $department):?>
+                <td> <?= EmployersLnkDepartments::checkRelation($employer, $department, $relations)  ?> </td>
+                <?php endforeach ?>
             </tr>
-            <tr>
-                <td>Петр Вейдер</td>
-                <td>✓</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Ольга Кеноби</td>
-                <td>✓</td>
-                <td></td>
-                <td>✓</td>
-            </tr>
+            <?php endforeach ?>
             </tbody>
         </table>
     </div>

@@ -1,5 +1,8 @@
 <?php
 /* @var $this yii\web\View */
+
+use app\helpers\EmployerHelper;
+
 ?>
 <h1>Сотрудники</h1>
 
@@ -23,7 +26,7 @@
                 <td><?= $employer->name ?></td>
                 <td><?= $employer->surname ?></td>
                 <td><?= $employer->patronymic ?></td>
-                <td><?= $employer->getGenderVariants()[$employer->gender] ?></td>
+                <td><?= EmployerHelper::getGenderName($employer->gender) ?></td>
                 <td><?= $employer->salary ?></td>
                 <td><?= $employer->findAllDepartments($employer) ?></td>
                 <td><a>Изменить </a><a>Удалить</a></td>

@@ -52,14 +52,6 @@ class Employer extends ActiveRecord
         return implode(',<br>', $result);
     }
 
-    public function getGenderVariants(): array
-    {
-        return [
-            static::GENDER_MALE   => 'Мужчина',
-            static::GENDER_FEMALE => 'Женщина',
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */

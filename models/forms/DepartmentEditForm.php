@@ -2,11 +2,20 @@
 
 namespace app\models\forms;
 
+use app\models\Department;
 use yii\base\Model;
 
-class DepartmentForm extends Model
+class DepartmentEditForm extends Model
 {
     public $name;
+    private $department;
+
+    public function __construct(Department $department, $config = [])
+    {
+        $this->department = $department;
+        $this->name = $department->name;
+        parent::__construct($config);
+    }
 
     /**
      * {@inheritdoc}

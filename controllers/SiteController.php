@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 use app\models\Department;
-use app\repositories\DepartmentRepository;
-use app\services\DepartmentCalculatorService;
+use app\models\Employer;
+use app\models\EmployersLnkDepartments;
 use app\services\DepartmentService;
+use app\services\EmployerService;
 use Yii;
-use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -17,6 +17,22 @@ use app\models\LoginForm;
 
 class SiteController extends Controller
 {
+
+    private $departmentService;
+    private $employerService;
+
+    public function __construct(
+        $id,
+        $module,
+        DepartmentService $departmentService,
+        EmployerService $employerService,
+        $config = [])
+    {
+        $this->departmentService = $departmentService;
+        $this->employerService = $employerService;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -66,7 +82,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $relations = EmployersLnkDepartments::getRelations();
+        return $this->render('index', [
+            'departments' => $this->departmentService->findAll(),
+            'employers' => $this->employerService->findAll(),
+            'relations' => $relations,
+        ]);
     }
 
     /**

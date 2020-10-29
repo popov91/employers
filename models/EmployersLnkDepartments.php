@@ -13,6 +13,22 @@ use yii\db\ActiveRecord;
  */
 class EmployersLnkDepartments extends ActiveRecord
 {
+    public static function getRelations()
+    {
+        return EmployersLnkDepartments::find()->all();
+    }
+
+    public static function checkRelation(Employer $employer, Department $department, $relations)
+    {
+        foreach ($relations as $relation) {
+            if ($relation->employer_id === $employer->id && $relation->department_id === $department->id) {
+                echo '✓';
+            } else {
+                echo '';
+            }
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

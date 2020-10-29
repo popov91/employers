@@ -4,7 +4,7 @@
 <h1>Отделы</h1>
 
 <div class="row">
-    <a style="padding-left: 15px">Добавить новый отдел</a> <br>
+    <a style="padding-left: 15px" href="create">Добавить новый отдел</a><br>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -20,7 +20,9 @@
                 <td><?= $department->name ?></td>
                 <td><?= $calculator->getEmployersCount($department->id) ?></td>
                 <td><?= $calculator->getMaxEmployersSalary($department->id) ?></td>
-                <td><a>Изменить </a><a>Удалить</a></td>
+                <td><a href="update?id=<?= $department->id ?>">Изменить </a>
+                    <a href="delete?id=<?= $department->id ?>">Удалить</a>
+                </td>
             </tr>
         <?php endforeach ?>
         </tbody>

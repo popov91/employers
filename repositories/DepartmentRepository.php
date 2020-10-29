@@ -6,6 +6,7 @@ use app\models\Department;
 use app\repositories\exceptions\NotFoundException;
 use Yii;
 use yii\db\Exception;
+use yii\web\NotFoundHttpException;
 
 class DepartmentRepository
 {
@@ -50,10 +51,12 @@ class DepartmentRepository
         }
     }
 
-    public function delete(Department $department): void
+    public function delete(Department $department)
     {
-        if (!$department->delete()) {
-            throw new \RuntimeException('Ошибка удаления.');
+        try {
+            $department->delete();
+        } catch (Exception $e) {
+            throw new \RuntimeException('Ошибка сохранения.');
         }
     }
 
@@ -88,5 +91,12 @@ class DepartmentRepository
         }
 
         return $salary;
+    }
+
+    public function checkRelations(string $id)
+    {
+        $department = $this->find($id);
+
+        return $department->employers;
     }
 }
